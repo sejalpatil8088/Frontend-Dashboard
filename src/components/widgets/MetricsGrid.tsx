@@ -8,6 +8,7 @@ import { TrendBadge } from '../ui/TrendBadge';
 import { Eye, ShoppingCart, Truck } from 'lucide-react';
 import './MetricsGrid.css';
 
+
 // ─── Constants ─────────────────────────────────────────────────────────────
 
 const SECTION_ICONS: Record<string, React.ReactNode> = {
@@ -63,6 +64,29 @@ const SectionPanel: React.FC<SectionPanelProps> = memo(({ section }) => (
         ))}
       </tbody>
     </table>
+
+    {/* ── Top Laggards (renders inside same card if data exists) ── */}
+    {section.laggards && section.laggards.length > 0 && (
+      <div className="metrics-section__bottom">
+        <div className="metrics-laggards__header">
+          <span className="metrics-laggards__title">Top Laggards</span>
+          <span className="metrics-laggards__metric">{section.laggardsMetric}</span>
+        </div>
+        <table className="metrics-table">
+          <tbody>
+            {section.laggards.map((row) => (
+              <tr key={row.label} className="metrics-table__row">
+                <td className="metrics-table__label metrics-table__label--link">{row.label}</td>
+                <td className="metrics-table__value">{row.value}</td>
+                <td className="metrics-table__trend">
+                  <TrendBadge value={row.trend} isPositive={row.isPositive} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
   </div>
 ));
 

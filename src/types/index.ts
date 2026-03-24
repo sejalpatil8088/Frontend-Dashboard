@@ -7,6 +7,7 @@ export interface IWidgetConfig {
   type: WidgetType;
   title: string;
   dataSource: string;
+  laggardsDataSource?: string;
   colSpan?: 1 | 2 | 3;
 }
 
@@ -67,6 +68,8 @@ export interface IMetricSection {
   title: string;
   status: MetricStatus;
   rows: IMetricRow[];
+   laggards?: IMetricRow[];
+  laggardsMetric?: string;
 }
 
 export interface IMetricsData {

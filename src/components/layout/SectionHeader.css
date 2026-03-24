@@ -1,3 +1,7 @@
+/* ============================================
+   DESKTOP — 100% untouched
+   ============================================ */
+
 .section-header {
   display: flex;
   align-items: center;
@@ -15,23 +19,20 @@
 
 .view-toggle {
   display: flex;
-  gap: 8px; /* spacing between buttons */
+  gap: 8px;
 }
 
 .view-btn {
   display: flex;
   align-items: center;
   gap: 6px;
-
   padding: 6px 12px;
   font-size: 13px;
   font-weight: 500;
-
   border-radius: 6px;
   border: 1px solid #e5e7eb;
   background: #fff;
   color: #374151;
-
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -79,6 +80,57 @@
   color: var(--color-text-primary);
   box-shadow: 0 1px 3px var(--color-shadow);
 }
+
 .view-btn.active .btn-icon {
   stroke: url(#btnGrad);
+}
+
+
+/* ============================================
+   MOBILE — ≤768px
+   Desktop styles above are 100% untouched.
+   ============================================ */
+
+@media (max-width: 768px) {
+
+  .section-header {
+    padding: 12px 16px 8px;
+  }
+
+  .section-header__title {
+    font-size: 15px;
+  }
+
+  .view-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    gap: 5px;
+  }
+}
+
+
+/* ============================================
+   SMALL MOBILE — ≤480px
+   ============================================ */
+
+@media (max-width: 480px) {
+
+  .section-header {
+    padding: 10px 12px 6px;
+  }
+
+  .section-header__title {
+    font-size: 14px;
+  }
+
+  .view-btn {
+    padding: 5px 8px;
+    font-size: 11px;
+    gap: 4px;
+  }
+
+  .view-btn svg {
+    width: 12px;
+    height: 12px;
+  }
 }

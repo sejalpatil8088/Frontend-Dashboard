@@ -86,3 +86,13 @@ body {
 /* Border hover variable for light/dark */
 [data-theme='light'] { --color-border-hover: #d1d5db; }
 [data-theme='dark']  { --color-border-hover: #3a3f52; }
+
+@media (max-width: 768px) {
+  .app-shell {
+    display: block;
+  }
+
+  .app-content {
+    padding-bottom: 16px;
+  }
+}

@@ -1,6 +1,6 @@
 .sidebar {
   width: 56px;
- height: 100vh;
+  height: 100vh;
   background: #ffffff;
   border-right: 1px solid #e5e7eb;
   display: flex;
@@ -11,7 +11,6 @@
   top: 0;
 }
 
-/* Logo */
 .sidebar__logo {
   margin-bottom: 20px;
 }
@@ -28,7 +27,6 @@
   font-weight: 700;
 }
 
-/* Nav */
 .sidebar__nav {
   display: flex;
   flex-direction: column;
@@ -36,7 +34,6 @@
   flex: 1;
 }
 
-/* Buttons */
 .sidebar__nav-item {
   width: 40px;
   height: 40px;
@@ -51,29 +48,24 @@
   transition: all 0.2s ease;
 }
 
-/* Hover */
 .sidebar__nav-item:hover {
   background: #f3f4f6;
   color: #111827;
 }
 
-/* Active (IMPORTANT) */
 .sidebar__nav-item.active {
   background: #eff6ff;
   color: #2563eb;
 }
 
-/* Bottom */
 .sidebar__bottom {
   margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 5px;
   align-items: center;
-  /* margin-top: -8px; */
 }
 
-/* Profile avatar */
 .sidebar__profile {
   width: 34px;
   height: 34px;
@@ -82,14 +74,79 @@
   border: none;
   cursor: pointer;
   padding: 0;
- 
-
 }
 
 .sidebar__profile img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  
+}
 
+
+/* ============================================
+   MOBILE — ≤768px
+   Sidebar collapses to a fixed bottom tab bar.
+   All desktop styles above are 100% untouched.
+   ============================================ */
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 100%;
+    height: 56px;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 8px;
+    border-right: none;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+    z-index: 1000;
+  }
+
+  .sidebar__logo {
+    display: none;
+  }
+
+  .sidebar__nav {
+    flex-direction: row;
+    flex: 1;
+    gap: 0;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .sidebar__bottom {
+    flex-direction: row;
+    gap: 0;
+    margin-top: 0;
+    align-items: center;
+  }
+}
+
+
+/* ============================================
+   SMALL MOBILE — ≤480px
+   ============================================ */
+
+@media (max-width: 480px) {
+
+  .sidebar {
+    height: 52px;
+    padding: 0 4px;
+  }
+
+  .sidebar__nav-item {
+    width: 40px;
+    height: 40px;
+  }
+
+  .sidebar__profile {
+    width: 30px;
+    height: 30px;
+  }
 }

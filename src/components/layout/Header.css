@@ -315,3 +315,193 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+
+/* ============================================
+   MOBILE RESPONSIVE — ≤768px
+   (Desktop styles above are untouched)
+   ============================================ */
+
+@media (max-width: 768px) {
+
+  /* --- Top Row: stack title block above controls --- */
+  .header-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px 12px;
+  }
+
+  /* --- Title row: keep toggle + divider + title inline --- */
+  .header-title-row {
+    gap: 8px;
+  }
+
+  .header-title {
+    font-size: 16px;
+  }
+
+  /* --- Meta: tighten left indent --- */
+  .header-product-info {
+    margin-left: 36px;
+    font-size: 12px;
+  }
+
+  .header-product-count {
+    font-size: 12px;
+  }
+
+  /* --- Controls: wrap onto two rows if needed --- */
+  .header-controls {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Date range: grow to fill available space */
+  .date-range {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .date-range__top {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .date-range__compare {
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Platform select: fixed comfortable width */
+  .platform-select {
+    flex: 0 0 auto;
+    padding: 10px 28px 10px 10px;
+    font-size: 12px;
+  }
+
+  /* Filter button: keep compact */
+  .filter-btn {
+    flex: 0 0 auto;
+    padding: 10px 10px;
+    font-size: 12px;
+  }
+
+  /* --- Breadcrumb: tighter padding --- */
+  .breadcrumb {
+    padding: 8px 16px;
+    font-size: 11px;
+  }
+
+  /* --- Tab row: stack tabs on top, sub-tabs below --- */
+  .tab-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 16px 10px;
+  }
+
+  /* Tab nav: allow horizontal scroll if tabs overflow */
+  .tab-nav {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;        /* Firefox */
+    padding: 4px;
+  }
+
+  .tab-nav::-webkit-scrollbar {
+    display: none;                /* Chrome/Safari */
+  }
+
+  .tab-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Sub-tab group: full width, keep items side by side */
+  .sub-tab-group {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .price-toggle {
+    flex-shrink: 0;
+  }
+
+  .price-tab {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .value-dropdown {
+    flex: 1 1 auto;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+
+/* ============================================
+   SMALL MOBILE — ≤480px
+   ============================================ */
+
+@media (max-width: 480px) {
+
+  .header-top-row {
+    padding: 12px 12px 10px;
+  }
+
+  .header-title {
+    font-size: 15px;
+  }
+
+  .header-product-info {
+    margin-left: 30px;
+  }
+
+  /* Stack date + platform + filter on smaller screens */
+  .header-controls {
+    gap: 6px;
+  }
+
+  .date-range {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .platform-select,
+  .filter-btn {
+    flex: 1 1 calc(50% - 3px);
+  }
+
+  .breadcrumb {
+    padding: 7px 12px;
+  }
+
+  .tab-row {
+    padding: 8px 12px 10px;
+  }
+
+  .tab-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .price-tab {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .value-dropdown {
+    font-size: 11px;
+  }
+}
