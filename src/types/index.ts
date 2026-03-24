@@ -7,6 +7,7 @@ export interface IWidgetConfig {
   type: WidgetType;
   title: string;
   dataSource: string;
+  dataSourceSP?: string;
   laggardsDataSource?: string;
   colSpan?: 1 | 2 | 3;
 }
@@ -92,15 +93,21 @@ export type Theme = 'light' | 'dark';
 
 // ─── Filters ───────────────────────────────────────────────────────────────
 
+export type PriceType = 'MRP' | 'SP';
+
 export interface IDateRange {
   label: string;
   startDate: string;
   endDate: string;
+  compareStartDate?: string;
+  compareEndDate?: string;
+  compareLabel?: string;
 }
 
 export interface IFilterState {
   dateRange: IDateRange;
   platform: string;
+  priceType: PriceType;
 }
 
 // ─── Navigation ────────────────────────────────────────────────────────────

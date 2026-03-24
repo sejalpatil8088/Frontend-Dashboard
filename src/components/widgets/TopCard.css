@@ -1,12 +1,12 @@
 .top-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  min-height: 100px;
+  height: 140px;
   position: relative;
   transition: all 0.2s ease;
 }
@@ -24,28 +24,27 @@
 /* HEADER */
 .top-card__header {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 }
 
 .top-card__icon {
-  color: #6b7280;
+  color: var(--color-text-secondary);
 }
 
 .top-card__title {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  letter-spacing: 0;
   color: black;
-  letter-spacing: 0.05em;
-  /* text-transform: uppercase; */
 }
 
 .top-card__label {
-  font-size: 10px;
-  color: #9ca3af;
-  font-style: italic;
-  
-
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-style: normal;
 }
 
 /* BODY */
@@ -71,7 +70,7 @@
 .top-card__value {
   font-size: 28px;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-text-primary);
   letter-spacing: -0.02em;
 }
 
@@ -83,7 +82,10 @@
 
 /* TREND BADGE */
 .top-card__trend {
+  background: #fff;
+  border-radius: 4px;
   position: absolute;
   top: 12px;
   right: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }

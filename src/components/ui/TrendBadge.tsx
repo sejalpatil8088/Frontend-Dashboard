@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import './TrendBadge.css';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 interface TrendBadgeProps {
   value: number;
@@ -16,8 +17,12 @@ export const TrendBadge: React.FC<TrendBadgeProps> = memo(({ value, isPositive }
     className={`trend-badge ${isPositive ? 'trend-badge--up' : 'trend-badge--down'}`}
     aria-label={`${isPositive ? 'Up' : 'Down'} ${Math.abs(value).toFixed(1)} percent`}
   >
-    <span className="trend-badge__arrow" aria-hidden="true">
-      {isPositive ? '↑' : '↓'}
+   <span className="trend-badge__arrow" aria-hidden="true">
+     {isPositive ? (
+  <TrendingUp size={12} style={{ transform: 'translateY(1px)' }} />
+) : (
+  <TrendingDown size={12} />
+)}
     </span>
     {Math.abs(value).toFixed(1)}%
   </span>

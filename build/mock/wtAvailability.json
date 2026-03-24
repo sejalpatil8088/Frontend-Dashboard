@@ -1,0 +1,20 @@
+{
+  "value": "23.5%",
+  "trend": 22.2,
+  "trendDirection": "up",
+  "label": "",
+  "sparkline": [
+    { "value": 19 },
+    { "value": 21 },
+    { "value": 20 },
+    { "value": 22 },
+    { "value": 21 },
+    { "value": 23 },
+    { "value": 22 },
+    { "value": 24 },
+    { "value": 22 },
+    { "value": 23 },
+    { "value": 24 },
+    { "value": 23.5 }
+  ]
+}

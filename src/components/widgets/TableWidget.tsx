@@ -2,11 +2,11 @@ import React, { useState, useMemo, memo } from 'react';
 import { IWidgetConfig, ITableData, ITableRow } from '../../types';
 import { useWidgetData } from '../../hooks/useWidgetData';
 import { useFilter } from '../../hooks/useFilter';
-import { Skeleton } from '../ui/Skeleton';
+// import { Skeleton } from '../ui/Skeleton';
 import { ErrorState } from '../ui/ErrorState';
 import { TrendBadge } from '../ui/TrendBadge';
 import './TableWidget.css';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+// import { TrendingUp, TrendingDown } from 'lucide-react';
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 
@@ -35,21 +35,21 @@ export const TableWidget: React.FC<TableWidgetProps> = memo(({ config }) => {
     });
   }, [data, sortDir]);
 
-  const toggleSort = () =>
-    setSortDir((prev) => (prev === 'desc' ? 'asc' : 'desc'));
+  // const toggleSort = () =>
+  //   setSortDir((prev) => (prev === 'desc' ? 'asc' : 'desc'));
 
-  if (status === 'idle' || status === 'loading') {
-    return (
-      <div className="table-widget table-widget--loading" aria-busy="true">
-        <Skeleton height={13} width="55%" borderRadius={3} />
-        <div className="table-widget__skeleton-rows">
-          <Skeleton height={13} borderRadius={3} />
-          <Skeleton height={13} borderRadius={3} />
-          <Skeleton height={13} borderRadius={3} />
-        </div>
-      </div>
-    );
-  }
+  // if (status === 'idle' || status === 'loading') {
+  //   return (
+  //     <div className="table-widget table-widget--loading" aria-busy="true">
+  //       <Skeleton height={13} width="55%" borderRadius={3} />
+  //       <div className="table-widget__skeleton-rows">
+  //         <Skeleton height={13} borderRadius={3} />
+  //         <Skeleton height={13} borderRadius={3} />
+  //         <Skeleton height={13} borderRadius={3} />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   if (status === 'error' || !data) {
     return (

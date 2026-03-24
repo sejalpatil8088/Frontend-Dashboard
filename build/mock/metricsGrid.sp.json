@@ -1,0 +1,49 @@
+{
+  "sections": [
+    {
+      "title": "Traffic",
+      "status": "Medium",
+      "rows": [
+        { "label": "Organic SOV",    "value": "18.2%", "trend": 14.1, "isPositive": true  },
+        { "label": "Paid SOV",       "value": "19.5%", "trend": -8.3, "isPositive": false },
+        { "label": "Branded Search", "value": "21.0%", "trend": 5.7,  "isPositive": true  }
+      ],
+      "laggardsMetric": "Overall SOV",
+      "laggards": [
+        { "label": "Sub Cat1", "value": "18.2%", "trend": 14.1, "isPositive": true  },
+        { "label": "Sub Cat2", "value": "19.5%", "trend": -8.3, "isPositive": false },
+        { "label": "Sub Cat3", "value": "21.0%", "trend": 5.7,  "isPositive": true  }
+      ]
+    },
+    {
+      "title": "Conversion",
+      "status": "Poor",
+      "rows": [
+        { "label": "RPI",           "value": 74,  "trend": -11.2, "isPositive": false },
+        { "label": "Rating",        "value": 61,  "trend": 4.8,   "isPositive": true  },
+        { "label": "Content Score", "value": 29,  "trend": -6.5,  "isPositive": false }
+      ],
+      "laggardsMetric": "RPI",
+      "laggards": [
+        { "label": "Sub Cat1", "value": "20.1%", "trend": -11.2, "isPositive": false },
+        { "label": "Sub Cat2", "value": "17.8%", "trend": 4.8,   "isPositive": true  },
+        { "label": "Sub Cat3", "value": "22.4%", "trend": -6.5,  "isPositive": false }
+      ]
+    },
+    {
+      "title": "Operations",
+      "status": "Good",
+      "rows": [
+        { "label": "Listing Status", "value": "31.2%", "trend": 18.6,  "isPositive": true  },
+        { "label": "Fill Rate",      "value": "26.8%", "trend": -3.2,  "isPositive": false },
+        { "label": "Stock in Hand",  "value": "29.4%", "trend": 9.1,   "isPositive": true  }
+      ],
+      "laggardsMetric": "Wt. Availability",
+      "laggards": [
+        { "label": "Sub Cat1", "value": "31.2%", "trend": 18.6,  "isPositive": true  },
+        { "label": "Sub Cat2", "value": "26.8%", "trend": -3.2,  "isPositive": false },
+        { "label": "Sub Cat3", "value": "29.4%", "trend": 9.1,   "isPositive": true  }
+      ]
+    }
+  ]
+}

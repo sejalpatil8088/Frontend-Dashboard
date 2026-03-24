@@ -3,11 +3,11 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   padding: 0 24px 24px;
-  background: transparent; /* avoid any extra visible container line */
+  background: transparent; 
 }
 
 .dashboard-grid__cell {
-  min-width: 0; /* prevent grid blowout */
+  min-width: 0; 
 }
 
 @media (max-width: 900px) {

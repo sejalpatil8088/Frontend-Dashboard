@@ -1,0 +1,14 @@
+.coming-soon {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  min-height: 100%;
+}
+
+.coming-soon__text {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+}

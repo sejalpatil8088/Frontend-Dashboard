@@ -1,50 +1,50 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './hooks/useTheme';
 import { FilterProvider } from './hooks/useFilter';
 import { Sidebar } from './components/layout/Sidebar';
-import { Header } from './components/layout/Header';
-import { SectionHeader } from './components/layout/SectionHeader';
-import { DashboardGrid } from './components/layout/DashboardGrid';
-import { IWidgetConfig, TabId } from './types';
-import dashboardConfig from './config/dashboardConfig.json';
+import { PlanningPage } from './pages/PlanningPage';
+import { ComingSoon } from './pages/ComingSoon';
+import {
+  PanelLeft,
+  Target,
+  FileText,
+  Settings,
+} from 'lucide-react';
 import './App.css';
 
-// Cast once at the app boundary — all consumers get the typed interface
-const WIDGET_CONFIGS = dashboardConfig as IWidgetConfig[];
-
-function Dashboard() {
-  const [activeTab, setActiveTab] = useState<TabId>('Overview');
-
-  // Partition configs into logical rows — avoids conditional layout logic in JSX
-  const { topCards, restWidgets } = useMemo(() => ({
-    topCards:    WIDGET_CONFIGS.filter((c) => c.type === 'topCard'),
-    restWidgets: WIDGET_CONFIGS.filter((c) => c.type !== 'topCard'),
-  }), []);
-
+/**
+ * AppShell lays out the persistent Sidebar next to the route-driven
+ * content area. Each page component owns its own `app-main` wrapper
+ * so it can control its internal layout (header, scroll, etc.) independently.
+ */
+function AppShell() {
   return (
     <div className="app-shell">
       <Sidebar />
-      <div className="app-main">
-        <Header activeTab={activeTab} onTabChange={setActiveTab} />
-        <main className="app-content" role="main">
-          <section className="performance-panel" aria-label="Performance Overview panel">
-            <SectionHeader />
-            <DashboardGrid configs={topCards} />
-            <DashboardGrid configs={restWidgets} />
-          </section>
-        </main>
-      </div>
+      <Routes>
+        <Route path="/"          element={<Navigate to="/planning" replace />} />
+        <Route path="/planning"  element={<PlanningPage />} />
+        <Route path="/dashboard" element={<ComingSoon pageName="Dashboard" Icon={PanelLeft} />} />
+        <Route path="/analytics" element={<ComingSoon pageName="Analytics" Icon={Target} />} />
+        <Route path="/reports"   element={<ComingSoon pageName="Reports"   Icon={FileText} />} />
+        <Route path="/settings"  element={<ComingSoon pageName="Settings"  Icon={Settings} />} />
+        {/* Catch-all: redirect unknown paths to planning */}
+        <Route path="*"          element={<Navigate to="/planning" replace />} />
+      </Routes>
     </div>
   );
 }
 
 function App() {
   return (
-    <ThemeProvider>
-      <FilterProvider>
-        <Dashboard />
-      </FilterProvider>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <FilterProvider>
+          <AppShell />
+        </FilterProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

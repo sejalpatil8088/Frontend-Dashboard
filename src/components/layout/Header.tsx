@@ -1,9 +1,10 @@
-import React, { memo } from 'react';
-import { useTheme } from '../../hooks/useTheme';
+import React, { memo, useState, useCallback } from 'react';
+// import { useTheme } from '../../hooks/useTheme';
 import { useFilter, PLATFORMS } from '../../hooks/useFilter';
 import { TabId } from '../../types';
+import { DateRangePicker, DateRangePickerValue, formatDate } from '../ui/DateRangePicker';
 import './Header.css';
-import { LayoutDashboard } from 'lucide-react';
+
 
 interface TabConfig {
   id: TabId;
@@ -24,13 +25,70 @@ interface HeaderProps {
   onTabChange: (tab: TabId) => void;
 }
 
+const SHORT_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const SHORT_DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+
+const parseStoredDate = (str?: string): Date | null => {
+  if (!str) return null;
+  const match = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!match) return null;
+  const d = new Date(Number(match[3]), Number(match[1]) - 1, Number(match[2]));
+  return isNaN(d.getTime()) ? null : d;
+};
+
+/** "23 Feb" or "23 Feb 2026" */
+const fmtShort = (date: Date, withYear = false): string => {
+  const s = `${date.getDate()} ${SHORT_MONTHS[date.getMonth()]}`;
+  return withYear ? `${s} ${date.getFullYear()}` : s;
+};
+
+/** "Mon - Tue 23 Feb - 24 Mar 2026" */
+const fmtPrimaryLabel = (start: Date | null, end: Date | null): string => {
+  if (!start || !end) return 'Select date range';
+  return `${SHORT_DAYS[start.getDay()]} - ${SHORT_DAYS[end.getDay()]} ${fmtShort(start)} - ${fmtShort(end, true)}`;
+};
+
+/** "24 Jan - 23 Feb 2026" */
+const fmtCompareLabel = (start: Date | null, end: Date | null): string => {
+  if (!start || !end) return '';
+  return `${fmtShort(start)} - ${fmtShort(end, true)}`;
+};
+
 export const Header: React.FC<HeaderProps> = memo(({ activeTab, onTabChange }) => {
-  const { filters, setPlatform } = useFilter();
-  const [activeSubTab, setActiveSubTab] = React.useState('By Value');
-  const [isDateOpen, setIsDateOpen] = React.useState(false);
-const [selectedDate, setSelectedDate] = React.useState('This Week');
+  const { filters, setDateRange, setPlatform, setPriceType } = useFilter();
+  const [activeSubTab, setActiveSubTab] = useState('By Value');
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
+
+  const pickerValue: DateRangePickerValue = {
+    primary: {
+      start: parseStoredDate(filters.dateRange.startDate),
+      end:   parseStoredDate(filters.dateRange.endDate),
+    },
+    compare: {
+      start: parseStoredDate(filters.dateRange.compareStartDate),
+      end:   parseStoredDate(filters.dateRange.compareEndDate),
+    },
+    primaryPreset: filters.dateRange.label,
+    comparePreset: filters.dateRange.compareLabel ?? 'Previous Period',
+  };
+
+  const handlePickerApply = useCallback((val: DateRangePickerValue) => {
+    setDateRange({
+      label:            val.primaryPreset,
+      startDate:        val.primary.start ? formatDate(val.primary.start) : '',
+      endDate:          val.primary.end   ? formatDate(val.primary.end)   : '',
+      compareStartDate: val.compare.start ? formatDate(val.compare.start) : undefined,
+      compareEndDate:   val.compare.end   ? formatDate(val.compare.end)   : undefined,
+      compareLabel:     val.comparePreset,
+    });
+    setIsPickerOpen(false);
+  }, [setDateRange]);
+
+  const closePicker = useCallback(() => setIsPickerOpen(false), []);
 
   return (
+    <>
     <header className="app-header">
       <div className="header-container">
 
@@ -76,13 +134,31 @@ const [selectedDate, setSelectedDate] = React.useState('This Week');
 
           {/* Controls */}
           <div className="header-controls">
-            <div className="date-range">
-    <div className="date-range__top">
-      <span>Sun - Sat &nbsp; {filters.dateRange.startDate} - {filters.dateRange.endDate}</span>
-      {/* <span className="date-range__arrow">⌄</span> */}
-    </div>
-    <div className="date-range__compare">Compare: 25 May - 31 May 2025</div>
-  </div>
+            <button
+              className="date-range"
+              onClick={() => setIsPickerOpen(true)}
+              aria-label="Open date range picker"
+            >
+              <div className="date-range__top">
+                <span className="date-range__primary">
+                  {fmtPrimaryLabel(
+                    parseStoredDate(filters.dateRange.startDate),
+                    parseStoredDate(filters.dateRange.endDate),
+                  )}
+                </span>
+                <svg className="date-range__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                  <path d="M1 1l5 5 5-5" stroke="#6b7280" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              {filters.dateRange.compareStartDate && (
+                <div className="date-range__compare">
+                  Compare: {fmtCompareLabel(
+                    parseStoredDate(filters.dateRange.compareStartDate),
+                    parseStoredDate(filters.dateRange.compareEndDate),
+                  )}
+                </div>
+              )}
+            </button>
 
             <select
     className="platform-select"
@@ -134,16 +210,16 @@ const [selectedDate, setSelectedDate] = React.useState('This Week');
 
   {/* ✅ MRP / SP Toggle */}
   <div className="price-toggle">
-  {['MRP', 'SP'].map((t, index) => (
-    <button
-      key={t}
-      className={`price-tab ${activeSubTab === t ? 'active' : ''}`}
-      onClick={() => setActiveSubTab(t)}
-    >
-      {t}
-    </button>
-  ))}
-</div>
+    {(['MRP', 'SP'] as const).map((t) => (
+      <button
+        key={t}
+        className={`price-tab ${filters.priceType === t ? 'active' : ''}`}
+        onClick={() => setPriceType(t)}
+      >
+        {t}
+      </button>
+    ))}
+  </div>
   {/* ✅ By Value Dropdown */}
   <select
     className="value-dropdown"
@@ -152,7 +228,7 @@ const [selectedDate, setSelectedDate] = React.useState('This Week');
   >
     <option value="By Value">By Value</option>
     <option value="By Volume">By Volume</option>
-    <option value="By Sales">By Sales</option>
+    {/* <option value="By Sales">By Sales</option> */}
   </select>
 
 </div>
@@ -161,6 +237,15 @@ const [selectedDate, setSelectedDate] = React.useState('This Week');
 
       </div>
     </header>
+
+    {isPickerOpen && (
+      <DateRangePicker
+        value={pickerValue}
+        onApply={handlePickerApply}
+        onClose={closePicker}
+      />
+    )}
+  </>
   );
 });
 

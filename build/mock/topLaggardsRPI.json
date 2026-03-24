@@ -1,0 +1,9 @@
+{
+  "metric": "RPI",
+  "columns": ["", "RPI", ""],
+  "rows": [
+    { "name": "Sub Cat1", "overallSOV": "23.5%", "trend": 32.5, "isPositive": true },
+    { "name": "Sub Cat2", "overallSOV": "23.5%", "trend": 32.5, "isPositive": false },
+    { "name": "Sub Cat3", "overallSOV": "23.5%", "trend": 32.5, "isPositive": true }
+  ]
+}

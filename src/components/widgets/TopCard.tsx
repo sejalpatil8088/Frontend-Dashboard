@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { AreaChart, Area, ResponsiveContainer, Tooltip } from 'recharts';
-import { TrendingUp, TrendingDown, BarChart3, Package } from 'lucide-react';
+// import { TrendingUp,  BarChart3, Package } from 'lucide-react';
 import { IWidgetConfig, ITopCardData } from '../../types';
 import { useWidgetData } from '../../hooks/useWidgetData';
 import { useFilter } from '../../hooks/useFilter';
@@ -9,18 +9,18 @@ import { ErrorState } from '../ui/ErrorState';
 import { TrendBadge } from '../ui/TrendBadge';
 import './TopCard.css';
 
-const getIcon = (title: string) => {
-  switch (title) {
-    case 'Market Share':
-      return <TrendingUp size={16} />;
-    case 'Overall SOV%':
-      return <BarChart3 size={16} />;
-    case 'Wt. Availability%':
-      return <Package size={16} />;
-    default:
-      return <TrendingUp size={16} />;
-  }
-};
+// const getIcon = (title: string) => {
+//   switch (title) {
+//     case 'Market Share':
+//       return <TrendingUp size={16} />;
+//     case 'Overall SOV%':
+//       return <BarChart3 size={16} />;
+//     case 'Wt. Availability%':
+//       return <Package size={16} />;
+//     default:
+//       return <TrendingUp size={16} />;
+//   }
+// };
 
 interface TopCardProps {
   config: IWidgetConfig;
@@ -28,8 +28,12 @@ interface TopCardProps {
 
 export const TopCard: React.FC<TopCardProps> = memo(({ config }) => {
   const { filters } = useFilter();
+  const dataSource =
+    filters.priceType === 'SP' && config.dataSourceSP
+      ? config.dataSourceSP
+      : config.dataSource;
   const { data, status, error, refetch } = useWidgetData<ITopCardData>(
-    config.dataSource,
+    dataSource,
     filters
   );
 

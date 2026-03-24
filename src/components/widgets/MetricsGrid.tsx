@@ -65,14 +65,22 @@ const SectionPanel: React.FC<SectionPanelProps> = memo(({ section }) => (
       </tbody>
     </table>
 
-    {/* ── Top Laggards (renders inside same card if data exists) ── */}
+    {/* ── Top Laggards ── */}
     {section.laggards && section.laggards.length > 0 && (
       <div className="metrics-section__bottom">
         <div className="metrics-laggards__header">
           <span className="metrics-laggards__title">Top Laggards</span>
-          <span className="metrics-laggards__metric">{section.laggardsMetric}</span>
+          <div className="metrics-laggards__dropdown">
+            <select
+              className="metrics-laggards__select"
+              aria-label={`${section.title} laggards metric`}
+              defaultValue={section.laggardsMetric}
+            >
+              <option value={section.laggardsMetric}>{section.laggardsMetric}</option>
+            </select>
+          </div>
         </div>
-        <table className="metrics-table">
+        <table className="metrics-table" aria-label={`${section.title} top laggards`}>
           <tbody>
             {section.laggards.map((row) => (
               <tr key={row.label} className="metrics-table__row">
@@ -100,8 +108,12 @@ interface MetricsGridProps {
 
 export const MetricsGrid: React.FC<MetricsGridProps> = memo(({ config }) => {
   const { filters } = useFilter();
+  const dataSource =
+    filters.priceType === 'SP' && config.dataSourceSP
+      ? config.dataSourceSP
+      : config.dataSource;
   const { data, status, error, refetch } = useWidgetData<IMetricsData>(
-    config.dataSource,
+    dataSource,
     filters
   );
 
