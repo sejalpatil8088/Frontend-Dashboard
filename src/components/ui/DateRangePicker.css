@@ -346,12 +346,72 @@
 /* ─── Responsive ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 700px) {
-  .drp {
-    flex-direction: column;
-    max-height: 95vh;
-    overflow-y: auto;
+  /* Bottom-sheet style overlay */
+  .drp-overlay {
+    align-items: flex-end;
   }
 
+  .drp {
+    flex-direction: column;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px 16px 0 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ── Calendar panel ── */
+  .drp__cal-panel {
+    padding: 16px 12px 12px;
+  }
+
+  /* Nav: stack the two month labels vertically */
+  .drp__nav-labels {
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 14px;
+  }
+
+  /* Stack the two month grids */
+  .drp__months {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .drp__month-sep {
+    display: none;
+  }
+
+  /* Comfortable touch targets for day cells */
+  .drp-cell {
+    height: 40px;
+    touch-action: manipulation;
+  }
+
+  .drp-cell__num {
+    width: 34px;
+    height: 34px;
+    font-size: 13px;
+  }
+
+  /* Footer: stack legend above actions */
+  .drp__footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .drp__actions {
+    justify-content: flex-end;
+  }
+
+  .drp__btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  /* ── Controls panel ── */
   .drp__panel-sep {
     width: auto;
     height: 1px;
@@ -363,7 +423,29 @@
     gap: 20px;
   }
 
-  .drp__cal-panel {
-    padding: 16px;
+  .drp__preset-select {
+    font-size: 15px;
+    padding: 11px 36px 11px 12px;
+  }
+
+  /* Keep start → end inputs on one row */
+  .drp__range-row {
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .drp__range-arrow {
+    padding-top: 10px;
+    flex-shrink: 0;
+  }
+
+  .drp__input-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .drp__date-input {
+    font-size: 14px;
+    padding: 10px 8px;
   }
 }

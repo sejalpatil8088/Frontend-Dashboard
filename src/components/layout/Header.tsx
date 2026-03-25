@@ -179,13 +179,10 @@ export const Header: React.FC<HeaderProps> = memo(({ activeTab, onTabChange }) =
         </div>
 
         {/* 🔹 Breadcrumb */}
-     
         <nav className="breadcrumb">
           <span>Planning</span>
           <span className="sep">›</span>
-          <span>Breadcrumb</span>
-          <span className="sep">›</span>
-          <span className="active">Breadcrumb</span>
+          <span className="active">{activeTab}</span>
         </nav>
 
         {/* 🔹 Tabs */}
