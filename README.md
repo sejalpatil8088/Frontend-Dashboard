@@ -141,7 +141,7 @@ Zero changes needed to layout, grid, or App.
 
 | Tool | Version | Purpose |
 |------|---------|---------|
-| React | 18 | UI framework |
+| React | 19 | UI framework |
 | TypeScript | 4.9 | Type safety |
 | Recharts | 3 | Sparkline charts |
 | CSS Variables | — | Theming, zero runtime cost |
